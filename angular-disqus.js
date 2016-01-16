@@ -1,5 +1,5 @@
 /* 
- * angular-disqus 1.1.0-a
+ * angular-disqus 1.1.1
  * http://github.com/alvaroveliz/angular-disqus
  * 
  * Licensed under the MIT license
