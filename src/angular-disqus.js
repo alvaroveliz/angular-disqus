@@ -96,10 +96,8 @@
      * Refreshes the count from DISQUSWIDGETS.
      */
     function getCount() {
-      var widgets = window.DISQUSWIDGETS;
-      if (widgets && angular.isFunction(widgets.getCount)) {
-        widgets.getCount();
-      }
+      window.DISQUSWIDGETS = undefined;
+      addScriptTag(shortname, TYPE_COUNT, true);
     }
 
     /**
@@ -127,15 +125,16 @@
      *  2. embed.js
      *
      * @param {String} shortname disqus shortname
-     * @param {String} type disqus script tag type
+     * @param {String} type disqus scirpt tag type
      */
-    function addScriptTag(shortname, type) {
+    function addScriptTag(shortname, type, force) {
       var container = getScriptContainer(),
       scriptSrc = getScriptSrc(shortname, type);
+      force = (typeof(force) != 'undefined') ? force : false;
 
       // If it already has a script tag in place then lets not do anything
       // This might happen if the user changes the page faster than then disqus can load
-      if (hasScriptTagInPlace(container, scriptSrc)) {
+      if (hasScriptTagInPlace(container, scriptSrc) && force == false) {
         return;
       }
 
@@ -182,11 +181,10 @@
        *
        * If the embed disqus is not added to page then adds that.
        *
-       * @param {String} id thread id
+       * @param {Stirng} id thread id
        */
       function loadCount(id) {
         setGlobals(id, $location.absUrl(), shortname);
-        addScriptTag(getShortname(), TYPE_EMBED);
         addScriptTag(getShortname(), TYPE_COUNT);
         getCount();
       }

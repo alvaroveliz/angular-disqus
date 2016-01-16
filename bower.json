@@ -1,6 +1,6 @@
 {
-  "name": "angular-disqus",
-  "version": "1.1.0",
+  "name": "alvaroveliz/angular-disqus",
+  "version": "1.1.0-a",
   "main": "angular-disqus.js",
   "ignore": [
     "node_modules",
